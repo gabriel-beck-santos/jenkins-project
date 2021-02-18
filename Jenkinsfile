@@ -9,13 +9,9 @@ pipeline {
         stage('Parallel') {
         parallel {
             stage('Stage A') {
-                when {
-                    environment name: 'FILE_NAME', value: 'filename.txt'
-                }
                 agent any
                 steps {
                     echo "On Stage A"
-                    fail()
                 }
             }
             stage('Stage B') {
@@ -34,7 +30,6 @@ pipeline {
         stage('Create Write File') {
             steps {
                 writeFile file: "$FILE_NAME", text: 'hello write file'
-                fail()
             }
         }
         stage('Archive Artifact Write File') {
